@@ -6497,7 +6497,7 @@ class Deconvolution_Output():
 
         return [population_matrix]
 
-    def calc_overlap_from_lit(self, fit, fit_type, show_overlap_plots = False):
+    def calc_overlap_from_lit(self, fit, fit_type, show_plot = False):
         population_matrix = fit[0][0][0]
         fit_results = fit[0][0][1]
         # print(fit_results)
@@ -6616,15 +6616,15 @@ class Deconvolution_Output():
                 b = int(b)
                 return r'${} \times 10^{{{}}}$'.format(a, b)
 
-            if show_overlap_plots:
+            if show_plot:
                 plt.figure(figsize=(4.0, 3.0))
                 plt.contourf(self.lengths, self.diameters, population_matrix, cm='viridis')
-                plt.ylim(10, 40)
-                plt.xlim(10, 200)
+                plt.yticks([5,15, 25, 35], fontsize=18)
+                plt.ylim(5, 20)
+                plt.xlim(10, 80)
                 plt.xlabel("Lengths (nm)", fontsize=20)
                 plt.ylabel("Diameters (nm)", fontsize=20)
                 plt.xticks(fontsize=18)
-                plt.yticks([5,15, 25, 35], fontsize=18)
                 plt.title("Predicted Population", fontsize=20)
                 cbar = plt.colorbar(format=ticker.FuncFormatter(fmt))
                 tick_font_size = 14
@@ -6635,12 +6635,12 @@ class Deconvolution_Output():
 
                 plt.figure(figsize=(4.0, 3.0))
                 plt.contourf(self.lengths, self.diameters, self.true_pop_matrix.T, cm='viridis')
-                plt.ylim(10, 40)
-                plt.xlim(10, 200)
+                plt.yticks([5,15, 25, 35], fontsize=18)
+                plt.ylim(5, 20)
+                plt.xlim(10, 80)
                 plt.xlabel("Lengths (nm)", fontsize=20)
                 plt.ylabel("Diameters (nm)", fontsize=20)
                 plt.xticks(fontsize=18)
-                plt.yticks([5,15, 25, 35], fontsize=18)
                 plt.title("Measured Population", fontsize=20)
                 cbar = plt.colorbar(format=ticker.FuncFormatter(fmt))
                 tick_font_size = 14
@@ -6651,12 +6651,12 @@ class Deconvolution_Output():
 
                 plt.figure(figsize=(4.0, 3.0))
                 plt.contourf(self.lengths, self.diameters, true_matrix_from_means, cm='viridis')
-                plt.ylim(10, 40)
-                plt.xlim(10, 200)
+                plt.yticks([5,15, 25, 35], fontsize=18)
+                plt.ylim(5, 20)
+                plt.xlim(10, 80)
                 plt.xlabel("Lengths (nm)", fontsize=20)
                 plt.ylabel("Diameters (nm)", fontsize=20)
                 plt.xticks(fontsize=18)
-                plt.yticks([5,15, 25, 35], fontsize=18)
                 plt.title("Measured Population Projected", fontsize=20)
                 cbar = plt.colorbar(format=ticker.FuncFormatter(fmt))
                 tick_font_size = 14
@@ -6667,12 +6667,12 @@ class Deconvolution_Output():
 
                 plt.figure(figsize=(4.0, 3.0))
                 plt.contourf(self.lengths, self.diameters, overlap_matrix.T, cm='viridis')
-                plt.ylim(10, 40)
-                plt.xlim(10, 200)
+                plt.yticks([5,15, 25, 35], fontsize=18)
+                plt.ylim(5, 20)
+                plt.xlim(10, 80)
                 plt.xlabel("Lengths (nm)", fontsize=20)
                 plt.ylabel("Diameters (nm)", fontsize=20)
                 plt.xticks(fontsize=18)
-                plt.yticks([5,15, 25, 35], fontsize=18)
                 plt.title("Overlap Matrix", fontsize=20)
                 cbar = plt.colorbar(format=ticker.FuncFormatter(fmt))
                 tick_font_size = 14
@@ -6686,7 +6686,7 @@ class Deconvolution_Output():
         else:
             return 'NA'
 
-    def tabulate_results(self, show_table = True, overlap_method = 'TEMs'):
+    def tabulate_results(self, show_table = True, overlap_method = 'TEMs', show_plot = False):
         # print('testing')
         # print(self.true_values)
         test_vars = [self.lengths_to_hist, self.ars_to_hist, self.diameters_to_hist]
@@ -6726,10 +6726,10 @@ class Deconvolution_Output():
                     if [] in test_vars:
                         table_list.append('NA')
                     else:
-                        table_list.append(self.calculate_overlap(self.fit_results[key], key))
+                        table_list.append(self.calculate_overlap(self.fit_results[key], key, show_plot=show_plot))
                 else:
                     # print('else')
-                    table_list.append(self.calc_overlap_from_lit(self.fit_results[key], key))
+                    table_list.append(self.calc_overlap_from_lit(self.fit_results[key], key, show_plot=show_plot))
             else:
                 table_list.append('NA')
 
