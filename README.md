@@ -9,6 +9,8 @@ Notebooks:
 "AuNR_SMA_Use_and_analysis.ipynb" contains code showing how the model was used in Applications 1 and 3 (Figure 3 - discussed in the manuscript) and how the model was validation against labeled spectra (Figure 2). 
 It also generates a few example plots used to make the flowchat in Figure 4. 
 
+"Application_2_code.ipynb" and "Application_2_Fig.ipynb" contains the scripts that generated the ML models used to predict the sizes of AuNRs from their reaction conditions. These results are shown in "Application_2_Fig.ipynb" and Figure 3 e-h, Application 2 
+
 "Edge_cutoff_threshold_selection.ipynb" creates the plot and illustrates the rational used to determine the edge cutoff threshold (795 nm) shown in Figure 4. 
 
 "Figure 1 and overlap examples.ipynb" generates the plots used in figure 1 and the overlap metric/2d population distribution projection example figures in the SI 
